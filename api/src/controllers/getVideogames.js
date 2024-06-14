@@ -11,8 +11,7 @@ const getVideogames = async (req, res) => {
 
         return results.map((videogame) => {
             const image = videogame.background_image;
-            const description = videogame.reviews_text_count;
-            const platforms = videogame.platforms;
+            const platforms = videogame.platforms.map(plat => plat.platform.name);
             const released = videogame.released;
             const rating = videogame.rating;
 
@@ -20,7 +19,6 @@ const getVideogames = async (req, res) => {
                 id: videogame.id,
                 name: videogame.name,
                 image,
-                description,
                 platforms,
                 released,
                 rating
