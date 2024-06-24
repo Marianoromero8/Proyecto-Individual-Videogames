@@ -14,6 +14,7 @@ const getVideogames = async (req, res) => {
             const platforms = videogame.platforms.map(plat => plat.platform.name);
             const released = videogame.released;
             const rating = videogame.rating;
+            const genres = videogame.genres.map(genre => genre.name)
 
             return({
                 id: videogame.id,
@@ -21,7 +22,8 @@ const getVideogames = async (req, res) => {
                 image,
                 platforms,
                 released,
-                rating
+                rating,
+                genres
             })
         })
     }

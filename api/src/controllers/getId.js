@@ -34,7 +34,7 @@ const getDetail = async (req, res) => {
     }
     catch(error){
         if(error.message){
-            return res.status(400).send('Videogame Not Found')
+            return res.status(400).send('Videogame Detail Not Found')
         }
         res.status(error.statusCode || 500).json(`error interno - ${error.message}`)
     }
