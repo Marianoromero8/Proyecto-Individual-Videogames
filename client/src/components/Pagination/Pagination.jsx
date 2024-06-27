@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './Pagination.module.css';
 import {useSelector} from 'react-redux'
 import Home from '../Home/Home';
@@ -15,6 +15,11 @@ const Pagination = ({onSearch}) => {
     const showVideogames = allVideogames.slice(startIndex, endIndex)
     
     const max = Math.ceil(allVideogames.length / porPag);
+
+    useEffect(() => {
+        setPagina(1);
+        setInput(1)
+    }, [allVideogames])
     
     const nextPage = () => {
         setInput(pagina + 1);
@@ -39,7 +44,7 @@ const Pagination = ({onSearch}) => {
     const onChange = (e) => {
         setInput(e.target.value)
     }
-    
+
     return (
         <>
       <Home videogames={showVideogames} onSearch={onSearch}/>
