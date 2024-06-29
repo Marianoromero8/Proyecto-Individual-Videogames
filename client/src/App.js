@@ -28,7 +28,7 @@ function App() {
 
         <Route path='/home' element={<Pagination onSearch={onSearch}/>}/>
 
-        <Route path='/form' element={<Form/>}/>
+        <Route path='/post' element={<Form/>}/>
 
         <Route path='/detail/:id' element={<Details/>}/>
 

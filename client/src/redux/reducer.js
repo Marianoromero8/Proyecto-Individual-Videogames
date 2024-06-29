@@ -42,9 +42,17 @@ const reducer = (state = initialState, action) => {
                     videogames: [...state.inmutableVideogames]
                 }
             }
-            const filtGenres = state.inmutableVideogames.filter(gen => 
-                gen.genres.some(g => g === action.payload)
-            )
+            const filtGenres = state.inmutableVideogames.filter(gen => {
+                if (Array.isArray(gen.genres)) {
+                    const lowerCasePayload = action.payload.toLowerCase();
+                    return gen.genres.some(g => g.toLowerCase() === lowerCasePayload);
+                } else if (typeof gen.genres === 'string') {
+                    const genresArray = gen.genres.split(', ').map(g => g.trim().toLowerCase());
+                    return genresArray.includes(action.payload.toLowerCase());
+                }
+                return false;
+            });
+            // const videogamesByGenres = state.inmutableVideogames.filter((videogame) => videogame.genres.includes(action.payload));
             return{
                 ...state,
                 videogames: filtGenres

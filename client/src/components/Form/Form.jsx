@@ -9,6 +9,10 @@ const Form = () => {
     const navigate = useNavigate()
     const allGenres = useSelector(state => state.genres);
 
+    const handleRefresh = () => {
+      window.location.reload()
+  }
+
   useEffect(() => {
     dispatch(getAllGenres());
   }, [dispatch]);
@@ -72,7 +76,7 @@ const Form = () => {
       // En el back hago el validador del form (en el post videogame)
       // Uso await porque quiero saber si se hizo con exito post para limpiar los inputs o no
       console.log(details);
-      await dispatch(createVideogame(details));
+      dispatch(createVideogame(details));
       setDetails({
         name: "",
         image:
@@ -103,7 +107,7 @@ const Form = () => {
 
   return (
     <div className={style.container}>
-      <Link to="/home">
+      <Link to="/home" onClick={handleRefresh}>
         <button onClick={() => {navigate('/home')}}>Go back</button>
       </Link>
 
@@ -131,7 +135,7 @@ const Form = () => {
             autoComplete="off"
             value={details.description}
             onChange={(e) => handleFormChange(e)}
-            require
+            required
           />
         </div>
         <div>
@@ -167,20 +171,20 @@ const Form = () => {
         </div>
         <div>
           <label htmlFor="genres">Genres</label>
-          <select onChange={(e) => handleGenres(e)}>
-            <option selected disabled>
+          <select onChange={(e) => handleGenres(e)} value={details.genres}>
+            <option disabled>
               Genres
             </option>
-            {allGenres.map((genre, index) => (
-              <option key={index} value={genre.name}>
+            {allGenres.map((genre) => (
+              <option key={genre.id} value={genre.name}>
                 {genre.name}
               </option>
             ))}
           </select>
           <ul>
-            {details.genres?.map((genre, index) => (
-              <li>
-                <button key={index} name={genre} onClick={(e) => handleRemoveGenre(e)}>
+            {details.genres?.map((genre, i) => (
+              <li key={i}>
+                <button name={genre} onClick={(e) => handleRemoveGenre(e)}>
                   {genre}
                 </button>
               </li>

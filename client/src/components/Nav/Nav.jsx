@@ -13,7 +13,7 @@ const Nav = ({onSearch}) => {
         <div>
             <button onClick={handleRefresh}>Refresh</button>
             <SearchBar onSearch={onSearch}/>
-            <button onClick={() => {navigate('/form')}}>Add new Video Game</button>
+            <button onClick={() => {navigate('/post')}}>Add new Video Game</button>
         </div>
     )
 }

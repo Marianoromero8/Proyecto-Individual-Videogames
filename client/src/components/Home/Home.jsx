@@ -5,7 +5,7 @@ import Card from '../Card/Card';
 import Filters from '../Filters/Filters';
 
 const Home = ({videogames, onSearch}) => {
-  
+    console.log(videogames)
     const firstVideogames = Math.ceil(videogames.length / 3)
     const secondVideogames = firstVideogames * 2;
 
