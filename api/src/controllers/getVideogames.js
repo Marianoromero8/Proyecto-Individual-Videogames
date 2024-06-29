@@ -11,17 +11,13 @@ const getVideogames = async (req, res) => {
 
         return results.map((videogame) => {
             const image = videogame.background_image;
-            const platforms = videogame.platforms.map(plat => plat.platform.name);
-            const released = videogame.released;
             const rating = videogame.rating;
-            const genres = videogame.genres.map(genre => genre.name)
+            const genres = videogame.genres.map(genre => genre.name).join(', ')
 
             return({
                 id: videogame.id,
                 name: videogame.name,
                 image,
-                platforms,
-                released,
                 rating,
                 genres
             })
@@ -42,7 +38,13 @@ const getVideogames = async (req, res) => {
                     }
                 }
             })
-            return(vg)
+            return vg.map(game => ({
+                id: game.id,
+                name: game.name,
+                image: game.image,
+                rating: game.rating,
+                genres: game.genres.map(gen => gen.name).join(', ')
+            }))
         }
         catch(error){
             return({error: error.message})

@@ -11,11 +11,11 @@ const getId = async (id) => {
         id: data.id,
         name: data.name,
         image: data.background_image,
-        platform: data.platforms.map(plat => plat.platform.name),
-        description: data.reddit_description,
+        platform: data.platforms.map(plat => plat.platform.name).join(', '),
+        description: data.description.replace(/<\/?[^>]+(>|$)/g, ""),
         released: data.released,
         rating: data.rating,
-        genres: data.genres.map(genre => genre.name)
+        genres: data.genres.map(genre => genre.name).join(', ')
     }
 
     return dataById;

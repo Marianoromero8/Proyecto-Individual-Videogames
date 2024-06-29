@@ -10,9 +10,9 @@ const getGenres = async (req, res) => {
         let genresDB = await Genres.findAll();
 
         if(genresDB.length == 0){
-        const allGenres = await axios (`https://api.rawg.io/api/genres?key=${API_KEY}`);
+        const response = await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`);
 
-        const {results} = allGenres.data;
+        const {results} = response.data;
 
         const genresToDB = results.map(genre => ({
             id: genre.id,

@@ -81,9 +81,15 @@ const getName = async (name) => {
             genres: game.genres.map(genre => genre.name)
         })) : [];
 
-        return [...apiResults, ...dbResults];
+        const bothResults = [...apiResults, ...dbResults]
+
+        if(bothResults.length === 0){
+            throw new Error("Videogame not found")
+        }
+
+        return bothResults;
     } catch (error) {
-        throw new Error("VideoGame by Name not Found");
+        throw new Error(error.message || "VideoGame by Name not Found");
     }
 };
 
