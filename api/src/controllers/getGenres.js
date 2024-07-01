@@ -5,8 +5,7 @@ const {API_KEY} = process.env;
 
 const getGenres = async (req, res) => {
     try{
-
-        //Obtener generos de labase de datos
+        //Obtener generos de la base de datos
         let genresDB = await Genres.findAll();
 
         if(genresDB.length == 0){

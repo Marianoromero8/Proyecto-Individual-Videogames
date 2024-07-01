@@ -6,7 +6,6 @@ const{Videogames, Genres} = require('../db')
 const getVideogames = async (req, res) => {
     try{
         const response = await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)
-
         const {results} = response.data;
 
         return results.map((videogame) => {
@@ -57,7 +56,6 @@ const getVideogames = async (req, res) => {
             const dbVideogames = await getVideogamesFromDB();
 
             const callVideogames = [...apiVideogames, ...dbVideogames]
-
             res.status(200).json(callVideogames)
         }
         catch(error){

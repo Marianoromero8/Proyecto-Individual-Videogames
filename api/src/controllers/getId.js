@@ -1,13 +1,38 @@
 const axios = require('axios')
 const {API_KEY} = process.env;
+const {Videogames, Genres} = require('../db')
 
 const getId = async (id) => {
     try{
-    const videogameIdApi = await axios (`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
+    //creo una constante donde guardo la verificacion del ID del videojuego en la DB
+    const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
 
+    //Primero buscamos en la base de datos  
+    if(isUUID){
+    const gameFromDB = await Videogames.findByPk(id, {
+        include: {
+            model: Genres,
+            through: 'videogames_genres'
+        }
+    })
+
+    if(gameFromDB){
+        return {
+            id: gameFromDB.id,
+            name: gameFromDB.name,
+            image: gameFromDB.image,
+            platform: gameFromDB.platforms.join(', '),
+            description: gameFromDB.description.replace(/<\/?[^>]+(>|$)/g, ""),
+            released: gameFromDB.released,
+            rating: gameFromDB.rating,
+            genres: gameFromDB.genres.map(genre => genre.name).join(', ')
+        }
+    }
+    }else{  //Si no esta en DB buscan en la API
+    const videogameIdApi = await axios (`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
     const {data} = videogameIdApi;
 
-    const dataById = {
+    return {
         id: data.id,
         name: data.name,
         image: data.background_image,
@@ -17,8 +42,7 @@ const getId = async (id) => {
         rating: data.rating,
         genres: data.genres.map(genre => genre.name).join(', ')
     }
-
-    return dataById;
+    }
     }
     catch(error){
         throw new Error('Details Not Found')
@@ -33,10 +57,7 @@ const getDetail = async (req, res) => {
         return res.status(200).json(videogame);
     }
     catch(error){
-        if(error.message){
-            return res.status(400).send('Videogame Detail Not Found')
-        }
-        res.status(error.statusCode || 500).json(`error interno - ${error.message}`)
+        res.status(400).send('Videogame Detail Not Found')
     }
 }
 
