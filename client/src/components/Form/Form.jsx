@@ -29,8 +29,7 @@ const Form = () => {
 
   const [details, setDetails] = useState({
     name: "",
-    image:
-      "https://st.depositphotos.com/1041273/3878/v/450/depositphotos_38783569-stock-illustration-video-game-icon.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuIgqTtIwHMemY0SbKCDuc0ElKssTJVfpDrg&s",
     description: "",
     released: "",
     rating: "",
@@ -63,12 +62,12 @@ const Form = () => {
     if (e.target.checked) {
       setDetails({
         ...details,
-        platforms: [...details.platforms, e.target.name], //cambio su valor cada vez que toca la checkbox, luego solo me traigo los true al crear el videogame
+        platforms: [...details.platforms, e.target.name], 
       });
     } else {
       setDetails({
         ...details,
-        platforms: details.platforms?.filter((platform) => platform !== e.target.name), //cambio su valor cada vez que toca la checkbox, luego solo me traigo los true al crear el videogame
+        platforms: details.platforms?.filter((platform) => platform !== e.target.name), 
       });
     }
   };
@@ -86,12 +85,15 @@ const Form = () => {
 
   const handleCreateVideogame = async (e) => {
     e.preventDefault();
+    if (Object.values(errors).some(error => error !== "")) {
+      alert("Please fill out all required fields.");
+      return;
+    }
     try {
       dispatch(createVideogame(details));
       setDetails({
         name: "",
-        image:
-          "https://st.depositphotos.com/1041273/3878/v/450/depositphotos_38783569-stock-illustration-video-game-icon.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuIgqTtIwHMemY0SbKCDuc0ElKssTJVfpDrg&s",
         description: "",
         released: "",
         rating: "",
@@ -100,7 +102,7 @@ const Form = () => {
       });
       alert ("Videogame Created Succesfully")
     } catch (error) {
-      alert("Missing data, name, description, rating (min 0 max 5), platforms and genres are required");
+      alert("Error! Try again");
     }
   };
 
@@ -124,25 +126,25 @@ const Form = () => {
       <form onSubmit={(e) => handleCreateVideogame(e)} className={style.form}>
         <div>
           <label htmlFor="name" className={style.label}>Name</label>
-          <input type="text" name="name" autoComplete="off" value={details.name} onChange={(e) => {return handleFormChange(e)}} />
+          <input type="text" name="name" autoComplete="off" value={details.name} onChange={(e) => {return handleFormChange(e)}} className={style.input}/>
           {errors.name && <p className={style.errors}>{errors.name}</p>}
         </div>
 
         <div>
           <label htmlFor="description" className={style.label}>Description</label>
-          <input type="text" name="description" autoComplete="off" value={details.description} onChange={(e) => handleFormChange(e)} required />
+          <input type="text" name="description" autoComplete="off" value={details.description} onChange={(e) => handleFormChange(e)} className={style.input} required />
           {errors.description && <p className={style.errors}>{errors.description}</p>}
         </div>
 
         <div>
           <label htmlFor="released" className={style.label}>Released date</label>
-          <input type="date" name="released" autoComplete="off" value={details.released} onChange={(e) => handleFormChange(e)} />
+          <input type="date" name="released" autoComplete="off" value={details.released} onChange={(e) => handleFormChange(e)} className={style.input}/>
           {errors.released && <p className={style.errors}>{errors.released}</p>}
         </div>
 
         <div>
           <label htmlFor="rating" className={style.label}>Rating</label>
-          <input type="number" name="rating" autoComplete="off" value={details.rating} onChange={(e) => handleFormChange(e)}/>
+          <input type="number" name="rating" autoComplete="off" value={details.rating} onChange={(e) => handleFormChange(e)} className={style.input}/>
           {errors.rating && <p className={style.errors}>{errors.rating}</p>}
 
         </div>
@@ -152,7 +154,7 @@ const Form = () => {
           <div>
             {videogamesPlatforms.map((platform) => (
               <label htmlFor="accept" key={platform}>
-                <input type="checkbox" name={platform} value={details.platforms} onChange={(e) => handleCheckbox(e)} />
+                <input type="checkbox" name={platform} value={details.platforms} onChange={(e) => handleCheckbox(e)} className={style.input}/>
                 {platform}
               </label>
             ))}

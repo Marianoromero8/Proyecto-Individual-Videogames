@@ -18,6 +18,12 @@ const Home = ({videogames, onSearch}) => {
         <Nav onSearch={onSearch}/>
         <Filters/>
         <div className={style.divCards}>
+        {videogames.length === 0 ? (
+            <div className={style.noResults}>
+                <p>Waiting...</p>
+            </div>
+        ) : (
+        <>
         <div className={style.divCardsTop}>
         {videogamesTop
         .map((coun) => (
@@ -38,9 +44,11 @@ const Home = ({videogames, onSearch}) => {
         ))
         }
         </div>
-        </div>
+      </>
+    )}
     </div>
-    )
+  </div>
+  )
 }
 
 export default Home;

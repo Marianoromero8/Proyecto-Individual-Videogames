@@ -1,0 +1,13 @@
+.landing{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background-image: url('../../../public/landingpage.avif');
+    background-size: cover;
+    background-position: center; 
+    color: #1282A2; 
+    text-align: center; 
+}
+

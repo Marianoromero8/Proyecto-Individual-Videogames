@@ -1,73 +1,75 @@
-.container{
+.container {
+  color: #034078;
     display: flex;
+    flex-direction: column;
     align-items: center;
-}
-
-.form{
-    color: #BB6B00;
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-    border: 1px solid;
-    flex: content;
-    justify-content: space-between;
+    justify-content: center;
+    height: 100vh; 
+  }
+  
+.form {
+    width: 400px; 
     padding: 20px;
-    display: inline-block;
-    justify-content: space-between;
-    
-}
-
-.tag{
-    font-size: x-small;
-    backdrop-filter: blur(10px);
-    border: solid 1px;
-    border-radius: 12px;
-    margin: 0 auto;
-    text-align: center;
-    width: 150px;
-    text-align: start;
-}
-
-.buttonTag{
-    color: #BB6B00;
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-    border: none;
-    width: 10px;
-    padding-left: 55px;
-}
-
-.select{
-    color: #BB6B00;
-    background-color: #690500;
-    backdrop-filter: blur(10px);
-}
-
+    border: 1px solid #0A1128;
+    border-radius: 5px;
+    background-color: #1282A2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+.checkbox-label {
+    margin-right: 10px;
+  }
+  
 .input{
-    color: #92977E;
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-}
+    background-color: #034078;
+  }
 
-.option{
-    color: grey;
-    background-color: black;
-    backdrop-filter: blur(10px)
-}
-
-.button{
-    color: #BB6B00;
-    background-color: #690500;
-    transition: all .3s;
-    border: 1px transparent;
-}
-
-.button:hover{
-    color: #690500;
-    background-color: #BB6B00;
+.button {
+    background-color: #034078;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
     cursor: pointer;
-    border: #BB6B00;
-}
-
-.errors{
+    border-radius: 4px;
+  }
+  
+.button:hover {
+    background-color: #0A1128;
+  }
+  
+.errors {
     color: red;
-}
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+li button {
+    background-color: #001F54;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+li button:hover {
+    background-color: #034078;
+  }
+  

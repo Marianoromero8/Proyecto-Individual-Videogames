@@ -25,7 +25,7 @@ const Details = () => {
         <h1 className={style.name}>{gameId.name}</h1>
         <h2 className={style.h2}>#{gameId.id}</h2>
         <h2 className={style.h2}>Platforms: {gameId.platform}</h2>
-        <h2 className={style.h2}>Description: {gameId.description}</h2>
+        <h2 className={style.description}>Description: {gameId.description}</h2>
         <h2 className={style.h2}>Released date: {gameId.released}</h2>
         <h2 className={style.h2}>Rating: {gameId.rating}</h2>
         <h2 className={style.h2}>Genres: {gameId.genres}</h2>

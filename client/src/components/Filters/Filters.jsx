@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { filterGenres, filterOrigin, getAllGenres, orderAZ, orderAsc, orderDesc, orderZA } from "../../redux/actions";
+import style from './Filters.module.css'
 
 const Filters = () => {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const Filters = () => {
 
     return(
         <div>
-        <section>
+        <section className={style.section}>
             <select name="" id="" onChange={handleOrigin}>
                 <option value="API">API</option>
                 <option value="DB">DATA BASE</option>

@@ -3,14 +3,14 @@
     width: 150px;
     height: 350px;
     margin-bottom: 25px;
-    border-color: #BB6B00;
+    border-color: #1282A2;
     border:  solid 1px ;
     border-radius: 12px;
     float: left;
 }
 
 .image{
-    border-color: #BB6B00;
+    border-color: #1282A2;
     border-radius: 12px;
     height: 150px;
     width: 150px;
@@ -19,13 +19,13 @@
 .h1{
     text-align: center;
     font-size: large;
-    color: #BB6B00;
+    color: #1282A2;
     font-family: 'Times New Roman', Times, serif;
 }
 .h2{
     text-align: center;
     font-size: small;
-    color: #BB6B00;
+    color: #1282A2;
     font-family: 'Times New Roman', Times, serif;
 }
 
