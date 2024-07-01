@@ -2,7 +2,7 @@ const {Videogames, Genres} = require('../db');
 const { Op } = require('sequelize');
 
 const postVideogames = async (req, res) => {
-    const {name, description, platforms, released, rating, genres} = req.body;
+    const {name, description, platforms, image, released, rating, genres} = req.body;
 
     if(!name || !description || platforms.length === 0 || !released || rating < 0 || rating > 5 || genres.length === 0){
        return res.statu(400).json({message: 'Check fields, something is wrong'})
@@ -15,6 +15,7 @@ const postVideogames = async (req, res) => {
           released,
           rating,
           platforms,
+          image
         });
               
       // Busco los genres que me pasaron, en mi DB de genres y los genres válidos los guardo en videogameGenres
