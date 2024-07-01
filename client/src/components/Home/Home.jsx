@@ -20,7 +20,7 @@ const Home = ({videogames, onSearch}) => {
         <div className={style.divCards}>
         {videogames.length === 0 ? (
             <div className={style.noResults}>
-                <p>Waiting...</p>
+                <p>...........</p>
             </div>
         ) : (
         <>
