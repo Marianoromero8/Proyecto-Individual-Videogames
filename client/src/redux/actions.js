@@ -10,6 +10,7 @@ export const ORDER_RATINGASC = "ORDER_RATINGASC";
 export const ORDER_RATINGDESC = "ORDER_RATINGDESC";
 export const CREATE_VIDEOGAME = "CREATE_VIDEOGAME";
 export const VIDEOGAME_DETAIL = "VIDEOGAME_DETAIL";
+export const FILTER_ORIGIN = "FILTER_ORIGIN";
 
 
 
@@ -109,6 +110,13 @@ export const filterGenres = (filter) => {
     return{
         type: FILTER_GENRES,
         payload: filter
+    }
+}
+
+export const filterOrigin = (origin) => {
+    return{
+        type: FILTER_ORIGIN,
+        payload: origin
     }
 }
 

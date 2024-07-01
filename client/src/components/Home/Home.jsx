@@ -9,9 +9,10 @@ const Home = ({videogames, onSearch}) => {
     const firstVideogames = Math.ceil(videogames.length / 3)
     const secondVideogames = firstVideogames * 2;
 
-    const videogamesTop = videogames.slice(0, firstVideogames)
-    const videogamesMiddle = videogames.slice(firstVideogames, secondVideogames)
-    const videogamesBottom = videogames.slice(secondVideogames)
+    const videogamesTop = videogames.slice(0, firstVideogames);
+    const videogamesMiddle = videogames.slice(firstVideogames, secondVideogames);
+    const videogamesBottom = videogames.slice(secondVideogames);
+    
     return(
     <div className={style.container}>
         <Nav onSearch={onSearch}/>

@@ -1,1 +1,73 @@
+.container{
+    display: flex;
+    align-items: center;
+}
 
+.form{
+    color: #BB6B00;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    border: 1px solid;
+    flex: content;
+    justify-content: space-between;
+    padding: 20px;
+    display: inline-block;
+    justify-content: space-between;
+    
+}
+
+.tag{
+    font-size: x-small;
+    backdrop-filter: blur(10px);
+    border: solid 1px;
+    border-radius: 12px;
+    margin: 0 auto;
+    text-align: center;
+    width: 150px;
+    text-align: start;
+}
+
+.buttonTag{
+    color: #BB6B00;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    border: none;
+    width: 10px;
+    padding-left: 55px;
+}
+
+.select{
+    color: #BB6B00;
+    background-color: #690500;
+    backdrop-filter: blur(10px);
+}
+
+.input{
+    color: #92977E;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+}
+
+.option{
+    color: grey;
+    background-color: black;
+    backdrop-filter: blur(10px)
+}
+
+.button{
+    color: #BB6B00;
+    background-color: #690500;
+    transition: all .3s;
+    border: 1px transparent;
+}
+
+.button:hover{
+    color: #690500;
+    background-color: #BB6B00;
+    cursor: pointer;
+    border: #BB6B00;
+}
+
+.errors{
+    color: red;
+}

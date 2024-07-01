@@ -5,10 +5,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import { videogameDetail } from "../../redux/actions";
 
 const Details = () => {
-    const {id} = useParams();
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const gameId = useSelector(state => state.videogameDetail)
+  const {id} = useParams();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const gameId = useSelector(state => state.videogameDetail)
 
   useEffect(() => {
     dispatch(videogameDetail(id))

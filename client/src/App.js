@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getAllVideogames, getByName } from './redux/actions';
@@ -7,6 +6,7 @@ import Landing from './components/Landing/Landing';
 import Pagination from './components/Pagination/Pagination';
 import Details from './components/Details/Details';
 import Form from './components/Form/Form';
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();

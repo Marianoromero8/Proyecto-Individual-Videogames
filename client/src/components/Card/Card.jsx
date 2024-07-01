@@ -19,8 +19,6 @@ const Card = ({coun}) => {
             <h1 className={style.h1}>Title: {coun.name}</h1>
             <h2 className={style.h2}>Genres:{genresArray}</h2>
             <h2 className={style.h2}>Rating: {coun.rating}</h2>
-            <h2 className={style.h2}>ID: #{coun.id}</h2>
-            
         </div>
     )
 }

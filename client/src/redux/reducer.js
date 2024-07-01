@@ -1,4 +1,4 @@
-import {ALL_VIDEOGAMES, ALL_GENRES, FETCH_ERROR, GET_BY_NAME, FILTER_GENRES, ORDER_AZ, ORDER_ZA, ORDER_RATINGASC, ORDER_RATINGDESC, CREATE_VIDEOGAME,VIDEOGAME_DETAIL} from './actions'
+import {ALL_VIDEOGAMES, ALL_GENRES, FETCH_ERROR, GET_BY_NAME, FILTER_GENRES, ORDER_AZ, ORDER_ZA, ORDER_RATINGASC, ORDER_RATINGDESC, CREATE_VIDEOGAME,VIDEOGAME_DETAIL, FILTER_ORIGIN} from './actions'
 
 const initialState = {
     inmutableVideogames: [],
@@ -28,7 +28,8 @@ const reducer = (state = initialState, action) => {
         case GET_BY_NAME:
         return{
             ...state,
-            videogames: action.payload
+            videogames: action.payload,
+            error: null
         }
         case CREATE_VIDEOGAME:
         return{
@@ -50,12 +51,23 @@ const reducer = (state = initialState, action) => {
                     const genresArray = gen.genres.split(', ').map(g => g.trim().toLowerCase());
                     return genresArray.includes(action.payload.toLowerCase());
                 }
-                return false;
             });
-            // const videogamesByGenres = state.inmutableVideogames.filter((videogame) => videogame.genres.includes(action.payload));
             return{
                 ...state,
                 videogames: filtGenres
+            }
+        case FILTER_ORIGIN:    
+            let filtOrigin
+            if(action.payload === "API"){
+                filtOrigin =  state.inmutableVideogames.filter(vg => typeof vg.id === "number")
+            } else if (action.payload === "DB"){
+                filtOrigin =  state.inmutableVideogames.filter(vg => typeof vg.id === "string")
+            } else{
+                filtOrigin = state.inmutableVideogames
+            }
+            return {
+                ...state,
+                videogames: filtOrigin 
             }
         case ORDER_AZ:
             const orderAZ = [...state.videogames].sort((a, b) => a.name.localeCompare(b.name))
@@ -88,7 +100,7 @@ const reducer = (state = initialState, action) => {
         case FETCH_ERROR:
             return{
                 ...state,
-                error: action.payload
+                error: action.payload,
             }
         default:
             return state;

@@ -2,31 +2,45 @@ import React, { useEffect, useState } from "react";
 import { createVideogame, getAllGenres } from "../../redux/actions";
 import {useDispatch, useSelector} from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import style from './Form.module.css'
+import style from './Form.module.css';
+import validations from "./validations";
 
 const Form = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
-    const allGenres = useSelector(state => state.genres);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const allGenres = useSelector(state => state.genres);
 
-    const handleRefresh = () => {
-      window.location.reload()
+  const handleRefresh = () => {
+    window.location.reload()
   }
 
   useEffect(() => {
     dispatch(getAllGenres());
   }, [dispatch]);
 
+  const[errors, setErrors] = useState({
+    name: "",
+    description: "",
+    released: "",
+    rating: "",
+    platforms: [],
+    genres: [],
+  })
+
   const [details, setDetails] = useState({
     name: "",
     image:
-      "https://images.unsplash.com/photo-1580327344181-c1163234e5a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dmlkZW8lMjBnYW1lfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+      "https://st.depositphotos.com/1041273/3878/v/450/depositphotos_38783569-stock-illustration-video-game-icon.jpg",
     description: "",
     released: "",
     rating: "",
     platforms: [],
     genres: [],
   });
+
+  useEffect(() => {
+    setErrors(validations(details))
+  }, [details])
 
   const videogamesPlatforms = [
     "PC",
@@ -41,7 +55,7 @@ const Form = () => {
   const handleFormChange = (e) => {
     setDetails({
       ...details,
-      [e.target.name]: e.target.value, //accedo con [] porque necesito el valor de id, si no lo pongo me toma literal "e.target.value"
+      [e.target.name]: e.target.value, 
     });
   };
 
@@ -73,20 +87,18 @@ const Form = () => {
   const handleCreateVideogame = async (e) => {
     e.preventDefault();
     try {
-      // En el back hago el validador del form (en el post videogame)
-      // Uso await porque quiero saber si se hizo con exito post para limpiar los inputs o no
-      console.log(details);
       dispatch(createVideogame(details));
       setDetails({
         name: "",
         image:
-          "https://images.unsplash.com/photo-1580327344181-c1163234e5a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dmlkZW8lMjBnYW1lfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+          "https://st.depositphotos.com/1041273/3878/v/450/depositphotos_38783569-stock-illustration-video-game-icon.jpg",
         description: "",
         released: "",
         rating: "",
         platforms: [],
         genres: [],
       });
+      alert ("Videogame Created Succesfully")
     } catch (error) {
       alert("Missing data, name, description, rating (min 0 max 5), platforms and genres are required");
     }
@@ -95,71 +107,48 @@ const Form = () => {
   const handleRemoveGenre = (e) => {
     e.preventDefault();
     const genreToRemove = e.target.name;
-    console.log("genres:", details.genres);
     setDetails({
       ...details,
       genres: details.genres.filter((genre) => genre !== genreToRemove),
     });
-    console.log("genres:", details.genres);
-    alert(`Genre ${e.target.name} deleted`);
-    //console.log(e.target.name);
   };
 
   return (
     <div className={style.container}>
       <Link to="/home" onClick={handleRefresh}>
-        <button onClick={() => {navigate('/home')}}>Go back</button>
+        <button onClick={() => {navigate('/home')}} className={style.button}>Go back</button>
       </Link>
 
       <h1>Create videogame</h1>
 
-      <form onSubmit={(e) => handleCreateVideogame(e)}>
+      <form onSubmit={(e) => handleCreateVideogame(e)} className={style.form}>
         <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            autoComplete="off"
-            value={details.name}
-            onChange={(e) => {
-              return handleFormChange(e);
-            }}
-          />
+          <label htmlFor="name" className={style.label}>Name</label>
+          <input type="text" name="name" autoComplete="off" value={details.name} onChange={(e) => {return handleFormChange(e)}} />
+          {errors.name && <p className={style.errors}>{errors.name}</p>}
         </div>
+
         <div>
-          {/* Probar un text area para description */}
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            name="description"
-            autoComplete="off"
-            value={details.description}
-            onChange={(e) => handleFormChange(e)}
-            required
-          />
+          <label htmlFor="description" className={style.label}>Description</label>
+          <input type="text" name="description" autoComplete="off" value={details.description} onChange={(e) => handleFormChange(e)} required />
+          {errors.description && <p className={style.errors}>{errors.description}</p>}
         </div>
+
         <div>
-          <label htmlFor="released">Released date</label>
-          <input
-            type="date"
-            name="released"
-            autoComplete="off"
-            value={details.released}
-            onChange={(e) => handleFormChange(e)}
-          />
+          <label htmlFor="released" className={style.label}>Released date</label>
+          <input type="date" name="released" autoComplete="off" value={details.released} onChange={(e) => handleFormChange(e)} />
+          {errors.released && <p className={style.errors}>{errors.released}</p>}
         </div>
+
         <div>
-          <label htmlFor="rating">Rating</label>
-          <input
-            type="number"
-            name="rating"
-            autoComplete="off"
-            value={details.rating}
-            onChange={(e) => handleFormChange(e)}
-          />
+          <label htmlFor="rating" className={style.label}>Rating</label>
+          <input type="number" name="rating" autoComplete="off" value={details.rating} onChange={(e) => handleFormChange(e)}/>
+          {errors.rating && <p className={style.errors}>{errors.rating}</p>}
+
         </div>
+
         <div>
-          <label htmlFor="platforms">Platforms</label>
+          <label htmlFor="platforms" className={style.label}>Platforms</label>
           <div>
             {videogamesPlatforms.map((platform) => (
               <label htmlFor="accept" key={platform}>
@@ -167,20 +156,21 @@ const Form = () => {
                 {platform}
               </label>
             ))}
+          {errors.platforms && <p className={style.errors}>{errors.platforms}</p>}
           </div>
         </div>
+
         <div>
-          <label htmlFor="genres">Genres</label>
+          <label htmlFor="genres" className={style.label}>Genres</label>
           <select onChange={(e) => handleGenres(e)} value={details.genres}>
-            <option disabled>
-              Genres
-            </option>
+            <option disabled>Genres</option>
             {allGenres.map((genre) => (
               <option key={genre.id} value={genre.name}>
                 {genre.name}
               </option>
             ))}
           </select>
+            {errors.genres && <p className={style.errors}>{errors.genres}</p>}
           <ul>
             {details.genres?.map((genre, i) => (
               <li key={i}>
@@ -192,8 +182,7 @@ const Form = () => {
           </ul>
         </div>
 
-        {/*Este boton dispara el onSubmit:*/}
-        <button type="submit">Create</button>
+        <button type="submit" className={style.button}>Create</button>
       </form>
     </div>
   )
