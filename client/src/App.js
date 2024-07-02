@@ -11,18 +11,18 @@ import './App.css';
 function App() {
   const dispatch = useDispatch();
 
-  const onSearch = (name) => {
-    dispatch(getByName(name))
+  const onSearch = (name) => { //Creo la funcion que me ayudara a buscar por nombre
+    dispatch(getByName(name)) //Aqui despacha la funcion de 'actions' que hara que busque por el nombre. Entra en juego Redux
   }
 
   useEffect(() => {
-    dispatch(getAllVideogames())
+    dispatch(getAllVideogames()) //Obtengo todos los videogames a traves de la 'actions'
   }, [dispatch])
 
   return (
     <div className="App">
 
-      <Routes>
+      <Routes> {/*Defino las rutas del sitio web*/}
 
         <Route path='/' element={<Landing/>}/>
 

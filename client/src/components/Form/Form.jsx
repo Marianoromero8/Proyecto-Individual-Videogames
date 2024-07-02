@@ -18,7 +18,7 @@ const Form = () => {
     dispatch(getAllGenres());
   }, [dispatch]);
 
-  const[errors, setErrors] = useState({
+  const[errors, setErrors] = useState({ //Almaceno los errores de la validacion del formulario
     name: "",
     description: "",
     released: "",
@@ -27,7 +27,7 @@ const Form = () => {
     genres: [],
   })
 
-  const [details, setDetails] = useState({
+  const [details, setDetails] = useState({ //Detalles del videgame que se esta ingresando en el form
     name: "",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuIgqTtIwHMemY0SbKCDuc0ElKssTJVfpDrg&s",
     description: "",
@@ -41,7 +41,7 @@ const Form = () => {
     setErrors(validations(details))
   }, [details])
 
-  const videogamesPlatforms = [
+  const videogamesPlatforms = [ //plataformas de videojuegos 
     "PC",
     "PlayStation5",
     "PlayStation4",
@@ -51,14 +51,14 @@ const Form = () => {
     "Android",
   ];
 
-  const handleFormChange = (e) => {
+  const handleFormChange = (e) => { //Actualiza el estado details cuando se cambian los valores de los campos del form
     setDetails({
       ...details,
       [e.target.name]: e.target.value, 
     });
   };
 
-  const handleCheckbox = (e) => {
+  const handleCheckbox = (e) => { //Maneja los cambios de las casillas de las plataformas
     if (e.target.checked) {
       setDetails({
         ...details,
@@ -72,7 +72,7 @@ const Form = () => {
     }
   };
 
-  const handleGenres = (e) => {
+  const handleGenres = (e) => { //Manejo de seleccion de genres 
     e.preventDefault();
     const genre = e.target.value;
     if (!details.genres.includes(genre)) {
@@ -83,9 +83,9 @@ const Form = () => {
     }
   };
 
-  const handleCreateVideogame = async (e) => {
+  const handleCreateVideogame = async (e) => { //Maneja la creacion de un nuevo videogame cuando se envia el form
     e.preventDefault();
-    if (Object.values(errors).some(error => error !== "")) {
+    if (Object.values(errors).some(error => error !== "")) { //los valores del obj errors se convierten en un arreglo, contienen mensajes de error o vacios si no los hay
       alert("Please fill out all required fields.");
       return;
     }

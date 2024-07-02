@@ -8,10 +8,10 @@ const Details = () => {
   const {id} = useParams();
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const gameId = useSelector(state => state.videogameDetail)
+  const gameId = useSelector(state => state.videogameDetail) //Obtengo el estado desde Redux
 
   useEffect(() => {
-    dispatch(videogameDetail(id))
+    dispatch(videogameDetail(id)) //ejecuto la funcion que me trae el detalle de la carta 
   }, [dispatch, id])
 
   return gameId ? (
@@ -31,7 +31,7 @@ const Details = () => {
         <h2 className={style.h2}>Genres: {gameId.genres}</h2>
     </div>
 
-    <button onClick={() => {navigate('/home')}}>Back</button>
+    <button onClick={() => {navigate('/home')}}>Back</button> {/*Creo un boton para volver al home desde el details*/}
 
     </div>
     </>

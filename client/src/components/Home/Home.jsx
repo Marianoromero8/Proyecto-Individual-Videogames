@@ -5,10 +5,11 @@ import Card from '../Card/Card';
 import Filters from '../Filters/Filters';
 
 const Home = ({videogames, onSearch}) => {
-    console.log(videogames)
+
     const firstVideogames = Math.ceil(videogames.length / 3)
     const secondVideogames = firstVideogames * 2;
 
+    //Abajo lo que hago es dividir en 3 filas de 5 los videogames que llamo
     const videogamesTop = videogames.slice(0, firstVideogames);
     const videogamesMiddle = videogames.slice(firstVideogames, secondVideogames);
     const videogamesBottom = videogames.slice(secondVideogames);
@@ -17,14 +18,14 @@ const Home = ({videogames, onSearch}) => {
     <div className={style.container}>
         <Nav onSearch={onSearch}/>
         <Filters/>
-        <div className={style.divCards}>
+        <div className={style.divCards}> {/*En este div para solucionar un problema de estetica cuando carga, si esta vacia la pantalla o no encuentra algo quedara .....*/}
         {videogames.length === 0 ? (
             <div className={style.noResults}>
                 <p>...........</p>
             </div>
         ) : (
         <>
-        <div className={style.divCardsTop}>
+        <div className={style.divCardsTop}> {/*Luego aqui como en los de abajo, renderizo los juegos en cada una de las 3 posiciones (top, middle y bottom) */}
         {videogamesTop
         .map((coun) => (
         <Card coun={coun} key={coun.id} />

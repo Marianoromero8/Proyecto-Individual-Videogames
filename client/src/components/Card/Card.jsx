@@ -2,15 +2,14 @@ import React from "react";
 import style from './Card.module.css';
 import { useNavigate } from "react-router-dom";
 
-
 const Card = ({coun}) => {
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const handleClick = () => { //Esta funcion hace que cuando clickeo la carta me redirija al detail de la misma, a traves del ID de cada juego
         navigate(`/detail/${coun.id}`);
     }
 
-    const genresArray = Array.isArray(coun.genres) ? coun.genres.join(', ') : coun.genres;
+    const genresArray = Array.isArray(coun.genres) ? coun.genres.join(', ') : coun.genres; //Si los genres son un array entonces los uno con coma en una cadena, sino devuelvo el genre
 
     return(
         <div className={style.card} onClick={handleClick}>
