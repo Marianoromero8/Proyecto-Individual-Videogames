@@ -28,7 +28,7 @@ const getName = async (name) => {
         }))
 
         const videogameFromDB = await Videogames.findAll({
-            where: { name: { [Op.iLike] : `%${name}%`} },
+            where: { name: { [Op.iLike] : `%${name}%`} }, // Esta linea hace que buque valores que coincidan con lo que busque, sin importar mayuscula y minuscula y el name encerrado quiere decir que buscar cualquier carta que contenga 'name'
             include: {
                 model: Genres,
                 through: 'videogames_genres'

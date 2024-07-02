@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('videogames', {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.UUID, //Esto sirve para luego distinguir ID con los de la API 
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     platforms: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.STRING), // Lo hice de esta forma para poder tratarlo como un array de strings y manejarlo mas facilmente
       allowNull: true,
     },
     image: {
@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     rating: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.FLOAT, //Tipo float para poder poner numeros con decimales
       allowNull: true,
       validate: {
         min: 1,
