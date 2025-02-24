@@ -1,4 +1,23 @@
-.div{
+.div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   color: #1282A2;
   margin-top: 25px;
+  padding-bottom: 20px;
+}
+
+.input {
+  display: flex;
+  color: #1282A2;
+  justify-items: center;
+  background-color: transparent;
+  border: none;
+
+}
+
+.p {
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
 }

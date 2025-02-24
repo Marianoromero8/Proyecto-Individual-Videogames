@@ -11,13 +11,12 @@ export const ORDER_RATINGDESC = "ORDER_RATINGDESC";
 export const CREATE_VIDEOGAME = "CREATE_VIDEOGAME";
 export const VIDEOGAME_DETAIL = "VIDEOGAME_DETAIL";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
-
-
+const API_URL = process.env.REACT_APP_URL_API;
 
 export const getAllVideogames = () => {
     return async function(dispatch){
         try{
-            const {data} = await axios.get('http://localhost:3001/api/videogames/')
+            const {data} = await axios.get(`${API_URL}/api/videogames/`)
             return dispatch ({
                 type: ALL_VIDEOGAMES,
                 payload: data
@@ -35,7 +34,7 @@ export const getAllVideogames = () => {
 export const getAllGenres = () => {
     return async function(dispatch){
         try{
-            const {data} = await axios.get('http://localhost:3001/api/genres/')
+            const {data} = await axios.get(`${API_URL}/api/genres/`)
             return dispatch ({
                 type: ALL_GENRES,
                 payload: data
@@ -53,7 +52,7 @@ export const getAllGenres = () => {
 export const createVideogame = (payload) => {
     return async function(dispatch){
         try{
-            const create = await axios.post('http://localhost:3001/api/videogames/post', payload)
+            const create = await axios.post(`${API_URL}/api/videogames/post`, payload)
             dispatch({
                 type: CREATE_VIDEOGAME,
                 payload: create.data
@@ -73,7 +72,7 @@ export const createVideogame = (payload) => {
 export const videogameDetail = (id) => {
     return async function(dispatch){
         try{
-            const {data} = await axios.get(`http://localhost:3001/api/videogames/${id}`)
+            const {data} = await axios.get(`${API_URL}/api/videogames/${id}`)
             return dispatch({
                 type: VIDEOGAME_DETAIL,
                 payload: data
@@ -91,7 +90,7 @@ export const videogameDetail = (id) => {
 export const getByName = (name) => {
     return async function(dispatch){
         try{
-            const {data} = await axios.get(`http://localhost:3001/api/videogames/videogame/name/?name=${name}`)
+            const {data} = await axios.get(`${API_URL}/api/videogames/videogame/name/?name=${name}`)
             return dispatch({
                 type: GET_BY_NAME,
                 payload: data

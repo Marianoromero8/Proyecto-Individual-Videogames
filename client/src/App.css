@@ -1,7 +1,8 @@
 .App {
   text-align: center;
-  background-image: url('../public/backgroundWeb.jpg');
+  background-color: #b7c6ca;
   background-size: cover;
+  padding-inline: 100px
 }
 
 .App-logo {
@@ -34,6 +35,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

@@ -2,16 +2,23 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
 const VideogameModel = require("./models/Videogame")
 const GenreModel = require("./models/Genres")
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
+
+sequelize.authenticate()
+  .then(() => console.log('Conexión exitosa a Neon'))
+  .catch((error) => console.error('Error al conectar con Neon:', error));
+
+sequelize.sync({ alter: true })
+  .then(() => console.log('Modelos sincronizados'))
+  .catch((error) => console.error('Error sincronizando modelos:', error));
+
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -41,8 +48,6 @@ const Genres = sequelize.models.genres;
 // Hacemos la relacion de varios a varios (belongToMany)
 Videogames.belongsToMany(Genres, {through:"videogames_genres"})
 Genres.belongsToMany(Videogames, {through:"videogames_genres"})
-
-
 
 module.exports = {
   Videogames, // para poder importar los modelos así: const { Product, User } = require('./db.js');

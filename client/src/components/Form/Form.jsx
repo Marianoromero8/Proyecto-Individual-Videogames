@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createVideogame, getAllGenres } from "../../redux/actions";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import style from './Form.module.css';
 import validations from "./validations";
@@ -18,7 +18,7 @@ const Form = () => {
     dispatch(getAllGenres());
   }, [dispatch]);
 
-  const[errors, setErrors] = useState({ //Almaceno los errores de la validacion del formulario
+  const [errors, setErrors] = useState({ //Almaceno los errores de la validacion del formulario
     name: "",
     description: "",
     released: "",
@@ -54,7 +54,7 @@ const Form = () => {
   const handleFormChange = (e) => { //Actualiza el estado details cuando se cambian los valores de los campos del form
     setDetails({
       ...details,
-      [e.target.name]: e.target.value, 
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -62,12 +62,12 @@ const Form = () => {
     if (e.target.checked) {
       setDetails({
         ...details,
-        platforms: [...details.platforms, e.target.name], 
+        platforms: [...details.platforms, e.target.name],
       });
     } else {
       setDetails({
         ...details,
-        platforms: details.platforms?.filter((platform) => platform !== e.target.name), 
+        platforms: details.platforms?.filter((platform) => platform !== e.target.name),
       });
     }
   };
@@ -100,7 +100,7 @@ const Form = () => {
         platforms: [],
         genres: [],
       });
-      alert ("Videogame Created Succesfully")
+      alert("Videogame Created Succesfully")
     } catch (error) {
       alert("Error! Try again");
     }
@@ -118,7 +118,7 @@ const Form = () => {
   return (
     <div className={style.container}>
       <Link to="/home" onClick={handleRefresh}>
-        <button onClick={() => {navigate('/home')}} className={style.button}>Go back</button>
+        <button onClick={() => { navigate('/home') }} className={style.button}>Go back</button>
       </Link>
 
       <h1>Create videogame</h1>
@@ -126,7 +126,7 @@ const Form = () => {
       <form onSubmit={(e) => handleCreateVideogame(e)} className={style.form}>
         <div>
           <label htmlFor="name" className={style.label}>Name</label>
-          <input type="text" name="name" autoComplete="off" value={details.name} onChange={(e) => {return handleFormChange(e)}} className={style.input}/>
+          <input type="text" name="name" autoComplete="off" value={details.name} onChange={(e) => { return handleFormChange(e) }} className={style.input} />
           {errors.name && <p className={style.errors}>{errors.name}</p>}
         </div>
 
@@ -138,13 +138,13 @@ const Form = () => {
 
         <div>
           <label htmlFor="released" className={style.label}>Released date</label>
-          <input type="date" name="released" autoComplete="off" value={details.released} onChange={(e) => handleFormChange(e)} className={style.input}/>
+          <input type="date" name="released" autoComplete="off" value={details.released} onChange={(e) => handleFormChange(e)} className={style.input} />
           {errors.released && <p className={style.errors}>{errors.released}</p>}
         </div>
 
         <div>
           <label htmlFor="rating" className={style.label}>Rating</label>
-          <input type="number" name="rating" autoComplete="off" value={details.rating} onChange={(e) => handleFormChange(e)} className={style.input}/>
+          <input type="number" name="rating" autoComplete="off" value={details.rating} onChange={(e) => handleFormChange(e)} className={style.input} />
           {errors.rating && <p className={style.errors}>{errors.rating}</p>}
 
         </div>
@@ -154,11 +154,11 @@ const Form = () => {
           <div>
             {videogamesPlatforms.map((platform) => (
               <label htmlFor="accept" key={platform}>
-                <input type="checkbox" name={platform} value={details.platforms} onChange={(e) => handleCheckbox(e)} className={style.input}/>
+                <input type="checkbox" name={platform} value={details.platforms} onChange={(e) => handleCheckbox(e)} className={style.input} />
                 {platform}
               </label>
             ))}
-          {errors.platforms && <p className={style.errors}>{errors.platforms}</p>}
+            {errors.platforms && <p className={style.errors}>{errors.platforms}</p>}
           </div>
         </div>
 
@@ -166,13 +166,13 @@ const Form = () => {
           <label htmlFor="genres" className={style.label}>Genres</label>
           <select onChange={(e) => handleGenres(e)} value={details.genres}>
             <option disabled>Genres</option>
-            {allGenres.map((genre) => (
+            {Array.isArray(allGenres) && allGenres.map((genre) => (
               <option key={genre.id} value={genre.name}>
                 {genre.name}
               </option>
             ))}
           </select>
-            {errors.genres && <p className={style.errors}>{errors.genres}</p>}
+          {errors.genres && <p className={style.errors}>{errors.genres}</p>}
           <ul>
             {details.genres?.map((genre, i) => (
               <li key={i}>
